@@ -33,19 +33,18 @@ let package = Package(
         ),
         .package(
             name: "secp256k1",
-            url: "https://github.com/GigaBitcoin/secp256k1.swift.git",
-            from: "0.17.0"
-        )
+            url: "https://github.com/zeugmaster/swift-secp256k1.git",
+            branch: "main")
     ],
     targets: [
         .target(
             name: "BIP32",
             dependencies: [
-                "Base58Check",
-                "BigInt",
-                "CryptoSwiftWrapper",
-                "RIPEMD160",
-                "secp256k1"
+                .product(name: "Base58Check", package: "Base58Check"),
+                .product(name: "BigInt", package: "BigInt"),
+                .product(name: "CryptoSwiftWrapper", package: "CryptoSwiftWrapper"),
+                .product(name: "RIPEMD160", package: "RIPEMD160"),
+                .product(name: "secp256k1", package: "secp256k1")
             ]
         ),
         .testTarget(
