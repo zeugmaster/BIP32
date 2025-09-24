@@ -42,9 +42,15 @@ extension PrivateChildKeyDerivator: PrivateChildKeyDerivating {
             }
 
             let serializedChildKey = computedChildKey.serialize()
-            let privatekey = serializedChildKey.count == Self.keyLength
-                ? serializedChildKey
-                : Self.keyPrefix.bytes + serializedChildKey
+            let privatekey: Data
+            if serializedChildKey.count == Self.keyLength {
+                privatekey = serializedChildKey
+            } else {
+                // Pad with leading zeros to make exactly 32 bytes (BIP32 compliant)
+                let paddingCount = Self.keyLength - serializedChildKey.count
+                let padding = Data(repeating: 0, count: paddingCount)
+                privatekey = padding + serializedChildKey
+            }
 
             return ExtendedKey(key: privatekey, chainCode: chainCode)
         } catch {

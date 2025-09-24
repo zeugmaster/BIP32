@@ -28,9 +28,15 @@ extension PrivateMasterKeyDerivator: PrivateMasterKeyDerivating {
                 throw KeyDerivatorError.invalidKey
             }
             let serializedBigIntegerKey = bigIntegerKey.serialize()
-            let privatekey = serializedBigIntegerKey.count == Self.keyLength
-                ? serializedBigIntegerKey
-                : Self.keyPrefix.bytes + serializedBigIntegerKey
+            let privatekey: Data
+            if serializedBigIntegerKey.count == Self.keyLength {
+                privatekey = serializedBigIntegerKey
+            } else {
+                // Pad with leading zeros to make exactly 32 bytes (BIP32 compliant)
+                let paddingCount = Self.keyLength - serializedBigIntegerKey.count
+                let padding = Data(repeating: 0, count: paddingCount)
+                privatekey = padding + serializedBigIntegerKey
+            }
 
             return ExtendedKey(key: privatekey, chainCode: chainCode)
         } catch {
