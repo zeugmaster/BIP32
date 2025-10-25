@@ -31,10 +31,9 @@ let package = Package(
             url: "https://github.com/anquii/RIPEMD160.git",
             .exact("1.0.0")
         ),
-        .package(
-            name: "secp256k1",
-            url: "https://github.com/zeugmaster/swift-secp256k1.git",
-            branch: "main")
+        .package(name: "swift-secp256k1",
+                 url: "https://github.com/21-DOT-DEV/swift-secp256k1",
+                 .exact("0.19.0")),
     ],
     targets: [
         .target(
@@ -44,7 +43,7 @@ let package = Package(
                 .product(name: "BigInt", package: "BigInt"),
                 .product(name: "CryptoSwiftWrapper", package: "CryptoSwiftWrapper"),
                 .product(name: "RIPEMD160", package: "RIPEMD160"),
-                .product(name: "secp256k1", package: "secp256k1")
+                .product(name: "secp256k1", package: "swift-secp256k1")
             ]
         ),
         .testTarget(
