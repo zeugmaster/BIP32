@@ -24,8 +24,8 @@ let package = Package(
             .exact("5.3.0")
         ),
         .package(
-            url: "https://github.com/anquii/CryptoSwiftWrapper.git",
-            .exact("1.4.3")
+            url: "https://github.com/krzyzanowskim/CryptoSwift.git",
+            .exact("1.9.0")
         ),
         .package(
             url: "https://github.com/anquii/RIPEMD160.git",
@@ -41,7 +41,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Base58Check", package: "Base58Check"),
                 .product(name: "BigInt", package: "BigInt"),
-                .product(name: "CryptoSwiftWrapper", package: "CryptoSwiftWrapper"),
+                .product(name: "CryptoSwift", package: "CryptoSwift"),
                 .product(name: "RIPEMD160", package: "RIPEMD160"),
                 .product(name: "secp256k1", package: "swift-secp256k1")
             ]
